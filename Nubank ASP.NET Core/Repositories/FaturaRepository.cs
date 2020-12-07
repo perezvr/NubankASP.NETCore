@@ -6,7 +6,7 @@ namespace NubankCore.Repositories
 {
     public class FaturaRepository : RepositoryBase<Fatura>, IFaturaRepository
     {
-        public FaturaRepository(ApplicationContext applicationContext) 
+        public FaturaRepository(ApplicationContext applicationContext)
             : base(applicationContext)
         {
         }
