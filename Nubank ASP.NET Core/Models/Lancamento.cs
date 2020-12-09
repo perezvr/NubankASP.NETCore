@@ -20,9 +20,9 @@ namespace NubankCore.Models
 
         [Required]
         public DateTime Data { get; private set; }
-        
+
         [Required]
-        [MaxLength(30, ErrorMessage = "Categoria deve ter no máximo 30 caracteres")] 
+        [MaxLength(30, ErrorMessage = "Categoria deve ter no máximo 30 caracteres")]
         public string Categoria { get; private set; }
 
         [Required]

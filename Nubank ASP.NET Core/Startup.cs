@@ -1,13 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using NubankCore.Connection;
+using NubankCore.Repositories;
+using NubankCore.Repositories.Interfaces;
 
 namespace Nubank_ASP.NET_Core
 {
@@ -24,6 +23,14 @@ namespace Nubank_ASP.NET_Core
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            var connString = Configuration.GetConnectionString("Default");
+
+            services.AddDbContext<ApplicationContext>(op =>
+               op.UseSqlServer(connString));
+
+            //Injeção de dependência
+            services.AddTransient<IFaturaRepository, FaturaRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +57,7 @@ namespace Nubank_ASP.NET_Core
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Fatura}/{action=Index}/{id?}");
             });
         }
     }
