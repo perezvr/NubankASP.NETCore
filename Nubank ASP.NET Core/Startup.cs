@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Nubank_ASP.NET_Core.Repositories;
+using Nubank_ASP.NET_Core.Repositories.Interfaces;
 using NubankCore.Connection;
 using NubankCore.Repositories;
 using NubankCore.Repositories.Interfaces;
@@ -31,6 +33,7 @@ namespace Nubank_ASP.NET_Core
 
             //Injeção de dependência
             services.AddTransient<IFaturaRepository, FaturaRepository>();
+            services.AddTransient<IResponsavelRepository, ResponsavelRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

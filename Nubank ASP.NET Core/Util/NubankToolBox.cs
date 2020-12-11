@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Nubank_ASP.NET_Core.Util
 {
@@ -46,5 +47,7 @@ namespace Nubank_ASP.NET_Core.Util
                 return string.Empty;
             }
         }
+
+        public static string DefineResponsavel(string descricao) => descricao.Split(" ").SingleOrDefault(p => p.StartsWith("@"));
     }
 }

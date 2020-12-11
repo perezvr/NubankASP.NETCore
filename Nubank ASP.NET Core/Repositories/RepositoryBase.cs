@@ -10,7 +10,7 @@ namespace NubankCore.Repositories
     public class RepositoryBase<T> : IRespositoryBase<T> where T : ModelBase
     {
         private readonly ApplicationContext _applicationContext;
-        private DbSet<T> DBSet { get; set; }
+        protected readonly DbSet<T> DBSet;
 
         public RepositoryBase(ApplicationContext applicationContext)
         {

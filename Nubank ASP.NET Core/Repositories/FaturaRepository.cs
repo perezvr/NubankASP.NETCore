@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Nubank_ASP.NET_Core.Repositories.Interfaces;
 using Nubank_ASP.NET_Core.Util;
 using NubankCore.Connection;
 using NubankCore.Models;
@@ -13,9 +14,12 @@ namespace NubankCore.Repositories
 {
     public class FaturaRepository : RepositoryBase<Fatura>, IFaturaRepository
     {
-        public FaturaRepository(ApplicationContext applicationContext)
+        private readonly IResponsavelRepository _responsavelRepository;
+
+        public FaturaRepository(ApplicationContext applicationContext, IResponsavelRepository responsavelRepository)
             : base(applicationContext)
         {
+            this._responsavelRepository = responsavelRepository;
         }
 
         /// <summary>
@@ -43,6 +47,8 @@ namespace NubankCore.Repositories
                     //int parcela = NubankToolBox.DefineParcela(descricao);
                     //int numParcelas = NubankToolBox.DefineNumParcelas(descricao);
                     var valor = NubankToolBox.FormataValor(values[3]);
+
+                    Responsavel responsavel = _responsavelRepository.GetByNome(NubankToolBox.DefineResponsavel(descricao)) ?? new Responsavel("Casa");
 
                     lancamento = new Lancamento(data, categoria, descricao, 0, 0, valor, fatura, new Responsavel("Casa"));
 
